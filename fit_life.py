@@ -3,8 +3,9 @@
 WATER_PER_KILO = 30
 MILLILITERS_IN_LITER = 1000
 EXPONENT = 2
-WEIGHT_QUESTION = "Сколько ты весишь в КИЛОГРАММАХ?"
-HEIGHT_QUESTION = "Какой у тебя рост в МЕТРАХ?"
+MAX_AGE = 150
+MAX_HEIGHT_IN_METERS = 3
+MAX_WEIGHT = 200
 
 
 # Функция, по получению возраста пользователя
@@ -12,17 +13,54 @@ def get_user_age() -> int|None:
     raw_user_age = input("Каков твой возраст?")
 
     try:
-        return int(raw_user_age)
+        age = int(raw_user_age)
+        if age <= 0:
+            print("0 и менее лет?")
+            raise ValueError
+        elif age >= MAX_AGE:
+            print("Ты из клана Дункан Маклауд из клана Маклаудов? 0_o")
+            raise ValueError
+        else:
+            return age
+
     except ValueError:
         print("Перепроверь правильность введенного числа. Должно быть целое число.")
 
 
-# Функция, по получению данных пользователя - вес, рост
-def get_user_data(question: str) -> float|None:
-    raw_user_data = input(f"{question} (дробные данные разделяй точкой, а не запятой)")
+# Функция, по получению роста пользователя
+def get_user_height() -> float|None:
+    raw_user_data = input(f"Какой у тебя рост в МЕТРАХ? (дробные данные разделяй точкой, а не запятой)")
 
     try:
-        return float(raw_user_data)
+        height = float(raw_user_data)
+        if height <= 0:
+            print("Ты что МИКРОБ? 0_о")
+            raise ValueError
+        elif height >= MAX_HEIGHT_IN_METERS:
+            print("Выше 2 метров?")
+            raise ValueError
+        else:
+            return height
+
+    except ValueError:
+        print("Перепроверь правильность введенного числа")
+
+
+# Функция, по получению веса пользователя
+def get_user_weight() -> float|None:
+    raw_user_weight = input(f"Сколько ты весишь в КИЛОГРАММАХ? (дробные данные разделяй точкой, а не запятой)")
+
+    try:
+        weight = float(raw_user_weight)
+        if weight <= 0:
+            print("Совсем ничего не весишь?")
+            raise ValueError
+        elif weight >= MAX_WEIGHT:
+            print("Больше ДВУХСОТ КИЛО?")
+            raise ValueError
+        else:
+            return weight
+
     except ValueError:
         print("Перепроверь правильность введенного числа")
 
@@ -39,16 +77,16 @@ while user_age is None:
 
 # 2. Сбор данных
 # Запрашиваем вес и пробуем перевести во float, перезапрашиваем данные пока не получим валидные
-user_weight = get_user_data(WEIGHT_QUESTION)
+user_weight = get_user_weight()
 while user_weight is None:
-    user_weight = get_user_data(WEIGHT_QUESTION)
+    user_weight = get_user_weight()
     if user_weight:
         break
 
 # Запрашиваем рост и пробуем перевести во float, перезапрашиваем данные пока не получим валидные
-user_height = get_user_data(HEIGHT_QUESTION)
+user_height = get_user_height()
 while user_height is None:
-    user_height = get_user_data(HEIGHT_QUESTION)
+    user_height = get_user_height()
     if user_height:
         break
 
