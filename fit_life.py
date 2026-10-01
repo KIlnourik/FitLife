@@ -8,8 +8,11 @@ MAX_HEIGHT_IN_METERS = 3
 MAX_WEIGHT = 200
 
 
-# Функция, по получению возраста пользователя
-def get_user_age() -> int|None:
+def get_user_age() -> int | None:
+    """
+    Функция, по получению возраста пользователя
+    :rtype: int|None
+    """
     raw_user_age = input("Каков твой возраст?")
 
     try:
@@ -18,18 +21,22 @@ def get_user_age() -> int|None:
             print("0 и менее лет?")
             raise ValueError
         elif age >= MAX_AGE:
-            print("Ты из клана Дункан Маклауд из клана Маклаудов? 0_o")
+            print("Ты Дункан Маклауд из клана Маклаудов? 0_o")
             raise ValueError
         else:
             return age
 
     except ValueError:
-        print("Перепроверь правильность введенного числа. Должно быть целое число.")
+        print("Перепроверь правильность введенного числа")
 
 
-# Функция, по получению роста пользователя
-def get_user_height() -> float|None:
-    raw_user_data = input(f"Какой у тебя рост в МЕТРАХ? (дробные данные разделяй точкой, а не запятой)")
+def get_user_height() -> float | None:
+    """
+    Функция, по получению роста пользователя
+    :rtype: float|None
+    """
+    raw_user_data = input("""Какой у тебя рост в МЕТРАХ?
+(дробные данные разделяй точкой, а не запятой)""")
 
     try:
         height = float(raw_user_data)
@@ -46,9 +53,13 @@ def get_user_height() -> float|None:
         print("Перепроверь правильность введенного числа")
 
 
-# Функция, по получению веса пользователя
-def get_user_weight() -> float|None:
-    raw_user_weight = input(f"Сколько ты весишь в КИЛОГРАММАХ? (дробные данные разделяй точкой, а не запятой)")
+def get_user_weight() -> float | None:
+    """
+    Функция, по получению веса пользователя
+    :rtype: float|None
+    """
+    raw_user_weight = input("""Сколько ты весишь в КИЛОГРАММАХ?
+(дробные данные разделяй точкой, а не запятой)""")
 
     try:
         weight = float(raw_user_weight)
@@ -68,7 +79,8 @@ def get_user_weight() -> float|None:
 # 1. Знакомство
 # Запрашиваем имя
 user_name = input("Как твое имя?")
-# Запрашиваем возраст, пробуем перевести в int, перезапрашиваем данные пока не получим валидные
+# Запрашиваем возраст, пробуем перевести в int,
+# перезапрашиваем данные пока не получим валидные
 user_age = get_user_age()
 while user_age is None:
     user_age = get_user_age()
@@ -76,14 +88,16 @@ while user_age is None:
         break
 
 # 2. Сбор данных
-# Запрашиваем вес и пробуем перевести во float, перезапрашиваем данные пока не получим валидные
+# Запрашиваем вес и пробуем перевести во float,
+# перезапрашиваем данные пока не получим валидные
 user_weight = get_user_weight()
 while user_weight is None:
     user_weight = get_user_weight()
     if user_weight:
         break
 
-# Запрашиваем рост и пробуем перевести во float, перезапрашиваем данные пока не получим валидные
+# Запрашиваем рост и пробуем перевести во float,
+# перезапрашиваем данные пока не получим валидные
 user_height = get_user_height()
 while user_height is None:
     user_height = get_user_height()
@@ -96,16 +110,16 @@ while user_height is None:
 bmi = round(user_weight / (user_height ** EXPONENT), 1)
 
 # Подсчет воды: вес * 30 мл
-# TODO: Рассчитай water_needed
 water = (user_weight * WATER_PER_KILO) / MILLILITERS_IN_LITER
 
 # 4. Вывод красивого результата
-# TODO: Используй f-строку, чтобы вывести приветствие, например: "Привет, Иван!"
 print(f"Привет, {user_name}!")
 print("Создал тут отчет для тебя. Давай посмотрим?")
-
-# TODO: Выведи возраст, ИМТ (округленный до 1 знака) и норму воды.
-print(f"Твои данные: тебе - {user_age} лет, рост - {user_height} метров, вес - {user_weight} кг")
+print(f"""
+Твои данные:
+    тебе - {user_age} лет,
+    рост - {user_height} метров,
+    вес - {user_weight} кг""")
 print(f"Твой Индекс Массы Тела (ИМТ): {bmi}")
 print(f"Рекомендуемая норма воды: {water} л. в день")
 print("Расчет окончен. Будьте здоровы!")
