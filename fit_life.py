@@ -1,6 +1,5 @@
 # Проект FitLife - MVP версия 1.0
-
-from helpers import get_plural_noun, get_imt_interpretation
+from helpers import get_imt_interpretation, get_plural_noun
 
 WATER_PER_KILO = 30
 MILLILITERS_IN_LITER = 1000
